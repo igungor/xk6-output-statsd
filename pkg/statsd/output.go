@@ -58,7 +58,12 @@ func (o *Output) dispatch(entry metrics.Sample) error {
 	case metrics.Gauge:
 		return o.client.Gauge(entry.Metric.Name, entry.Value, tagList, 1)
 	case metrics.Rate:
-		if check, ok := entry.Tags.Get("check"); ok {
+		fmt.Printf("*** entry tags: %v\n", entry.Tags)
+
+		check, ok := entry.Tags.Get("check")
+		fmt.Printf("*** entry tags.check, ok: %q, ok\n", check, ok)
+
+		if ok {
 			return o.client.Count(
 				checkToString(check, entry.Value),
 				1,
