@@ -61,7 +61,7 @@ func (o *Output) dispatch(entry metrics.Sample) error {
 		fmt.Printf("*** entry tags: %v\n", entry.Tags)
 
 		check, ok := entry.Tags.Get("check")
-		fmt.Printf("*** entry tags.check, ok: %q, ok\n", check, ok)
+		fmt.Printf("*** entry tags.check, ok: %q, %v\n", check, ok)
 
 		if ok {
 			return o.client.Count(
